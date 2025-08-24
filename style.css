@@ -1,0 +1,1030 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:300italic);
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    overflow: hidden;
+}
+
+.container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f172a 0%, #581c87 50%, #0f172a 100%);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Enhanced Stars background */
+.star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    opacity: 0;
+    animation: starTwinkle 3s ease-in-out infinite;
+}
+
+.star.small {
+    width: 2px;
+    height: 2px;
+}
+
+.star.medium {
+    width: 3px;
+    height: 3px;
+}
+
+.star.large {
+    width: 4px;
+    height: 4px;
+}
+
+/* Enhanced Sparkles with different types */
+.sparkle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0;
+    animation: sparkleFloat 4s ease-in-out infinite;
+}
+
+.sparkle.pink {
+    background: #f472b6;
+    box-shadow: 0 0 10px #f472b6;
+}
+
+.sparkle.purple {
+    background: #a855f7;
+    box-shadow: 0 0 10px #a855f7;
+}
+
+.sparkle.white {
+    background: white;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+.sparkle.small {
+    width: 4px;
+    height: 4px;
+}
+
+.sparkle.medium {
+    width: 6px;
+    height: 6px;
+}
+
+.sparkle.large {
+    width: 8px;
+    height: 8px;
+}
+
+/* Floating hearts */
+.floating-heart {
+    position: absolute;
+    color: #f472b6;
+    font-size: 12px;
+    opacity: 0;
+    animation: floatingHearts 8s ease-in-out infinite;
+    pointer-events: none;
+}
+
+/* Magic dust particles */
+.magic-dust {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    background: #fbbf24;
+    border-radius: 50%;
+    opacity: 0;
+    animation: magicDust 6s linear infinite;
+}
+
+/* Confetti Explosion */
+.confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    opacity: 0;
+}
+
+.confetti.square {
+    background: #f472b6;
+    animation: confettiFall 4s ease-out forwards;
+}
+
+.confetti.circle {
+    background: #a855f7;
+    border-radius: 50%;
+    animation: confettiFall 4s ease-out forwards;
+}
+
+.confetti.triangle {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 10px solid #ec4899;
+    animation: confettiFall 4s ease-out forwards;
+}
+
+.confetti.heart {
+    color: #f472b6;
+    font-size: 12px;
+    width: auto;
+    height: auto;
+    animation: confettiFall 4s ease-out forwards;
+}
+
+.confetti.star {
+    color: #fbbf24;
+    font-size: 10px;
+    width: auto;
+    height: auto;
+    animation: confettiFall 4s ease-out forwards;
+}
+
+.confetti.diamond {
+    width: 8px;
+    height: 8px;
+    background: #10b981;
+    transform: rotate(45deg);
+    animation: confettiFall 4s ease-out forwards;
+}
+
+/* Heart Loader Container */
+.heart-loader {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Heart Shape with enhanced animation */
+.heart-shape {
+    width: 80px;
+    height: 80px;
+    position: relative;
+    animation: heartLoaderCycle 4s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px rgba(236, 72, 153, 0.5));
+}
+
+/* Enhanced white shadow below heart */
+.heart-shadow {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    filter: blur(12px);
+    animation: shadowPulse 2s ease-in-out infinite;
+}
+
+/* Enhanced heart glow effect */
+.heart-glow {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.heart-glow-effect {
+    width: 140px;
+    height: 70px;
+    background: radial-gradient(ellipse, rgba(236, 72, 153, 0.4) 0%, rgba(236, 72, 153, 0.1) 70%, transparent 100%);
+    border-radius: 50%;
+    filter: blur(30px);
+    animation: glowPulse 3s ease-in-out infinite;
+}
+
+/* Main content with enhanced animations */
+.main-content {
+    text-align: center;
+    z-index: 10;
+    position: relative;
+    animation: contentFloat 6s ease-in-out infinite;
+}
+
+.heart-container {
+    position: relative;
+    margin-bottom: 2rem;
+    animation: heartContainerFloat 4s ease-in-out infinite;
+}
+
+.main-title {
+    font-size: 3rem;
+    font-weight: bold;
+    background: linear-gradient(45deg, #f472b6, #a855f7, #ec4899, #d946ef);
+    background-size: 300% 300%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+    animation: gradientShift 4s ease-in-out infinite, textGlow 2s ease-in-out infinite, fade-in 1s ease-out;
+    text-shadow: 0 0 30px rgba(236, 72, 153, 0.3);
+}
+
+.subtitle {
+    font-size: 1.25rem;
+    color: #d1d5db;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+    animation: fade-in 1s ease-out 0.5s both, subtitleFloat 5s ease-in-out infinite;
+    text-shadow: 0 0 10px rgba(209, 213, 219, 0.3);
+}
+
+/* Enhanced loading text */
+.loading-text {
+    font-size: 0.875rem;
+    color: #9ca3af;
+    margin-top: 1rem;
+    opacity: 0;
+    animation: fade-in 0.5s ease-out 0.5s forwards, loadingPulse 2s ease-in-out infinite;
+}
+
+/* Main page content with enhanced animations */
+.main-page {
+    display: none; /* Hidden by default */
+    text-align: center;
+    padding: 2rem;
+    position: absolute; /* Added for smooth transitions */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    flex-direction: column; /* Added for centering when visible */
+    align-items: center; /* Added for centering when visible */
+    justify-content: center; /* Added for centering when visible */
+    z-index: 1; /* Ensure it's above the background */
+}
+
+.main-page.show {
+    display: flex; /* Only display as flex when 'show' class is present */
+    animation: pageSlideIn 1.5s ease-out;
+}
+
+/* NEW: Slide out to top animation for main page */
+.main-page.slide-out-to-top {
+    animation: slideOutToTop 0.8s ease-out forwards;
+}
+
+.main-page .heart {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 1.5rem;
+    position: relative;
+    animation: mainHeartBounce 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 15px rgba(236, 72, 153, 0.6));
+}
+
+.main-page .heart::before,
+.main-page .heart::after {
+    content: '';
+    width: 32px;
+    height: 52px;
+    position: absolute;
+    left: 32px;
+    transform: rotate(-45deg);
+    background: linear-gradient(45deg, #ec4899, #f472b6);
+    border-radius: 32px 32px 0 0;
+    transform-origin: 0 100%;
+}
+
+.main-page .heart::after {
+    left: 0;
+    transform: rotate(45deg);
+    transform-origin: 100% 100%;
+}
+
+.birthday-title {
+    font-size: 4rem;
+    font-weight: bold;
+    background: linear-gradient(45deg, #f472b6, #a855f7, #ec4899, #d946ef);
+    background-size: 300% 300%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+    animation: gradientShift 4s ease-in-out infinite, titleBounce 2s ease-in-out infinite;
+    text-shadow: 0 0 40px rgba(236, 72, 153, 0.4);
+}
+
+.birthday-subtitle {
+    font-size: 1.5rem;
+    color: #d1d5db;
+    margin-bottom: 2rem;
+    animation: subtitleGlow 3s ease-in-out infinite;
+    text-shadow: 0 0 15px rgba(209, 213, 219, 0.4);
+}
+
+/* Beautiful Countdown Timer */
+.countdown-container {
+    margin-top: 2rem;
+    animation: countdownFloat 4s ease-in-out infinite;
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+.countdown-hide {
+    opacity: 0 !important;
+    transform: translateY(-20px) !important;
+}
+
+.countdown-title {
+    font-size: 1.2rem;
+    color: #d1d5db;
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+    animation: countdownTitleGlow 3s ease-in-out infinite;
+    text-shadow: 0 0 10px rgba(209, 213, 219, 0.3);
+}
+
+.countdown-timer {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.countdown-item {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 1rem 0.8rem;
+    min-width: 70px;
+    text-align: center;
+    animation: countdownItemPulse 2s ease-in-out infinite;
+    box-shadow: 0 8px 32px rgba(236, 72, 153, 0.2);
+}
+
+.countdown-number {
+    font-size: 2rem;
+    font-weight: bold;
+    background: linear-gradient(45deg, #f472b6, #a855f7, #ec4899);
+    background-size: 200% 200%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 3s ease-in-out infinite;
+    text-shadow: 0 0 20px rgba(236, 72, 153, 0.5);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+}
+
+.countdown-label {
+    font-size: 0.75rem;
+    color: #d1d5db;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.8;
+    font-weight: 500;
+}
+
+.countdown-message {
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    color: #f472b6;
+    opacity: 0.9;
+    animation: messageGlow 2s ease-in-out infinite;
+    text-shadow: 0 0 15px rgba(244, 114, 182, 0.4);
+}
+
+/* Let's Celebrate Button */
+.celebrate-button {
+    display: none;
+    margin-top: 2rem;
+    animation: celebrateButtonEntrance 1s ease-out;
+}
+
+.celebrate-button.show {
+    display: block;
+}
+
+.celebrate-btn {
+    background: linear-gradient(45deg, #f472b6, #a855f7, #ec4899);
+    background-size: 200% 200%;
+    border: none;
+    border-radius: 25px;
+    padding: 0.7rem 1.8rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0 15px 35px rgba(236, 72, 153, 0.4);
+    transition: all 0.3s ease;
+    animation: gradientShift 3s ease-in-out infinite, celebrateButtonPulse 2s ease-in-out infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+.celebrate-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 20px 40px rgba(236, 72, 153, 0.6);
+}
+
+.celebrate-btn:active {
+    transform: translateY(-2px) scale(1.02);
+}
+
+.celebrate-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.celebrate-btn:hover::before {
+    left: 100%;
+}
+
+/* Fixed Heart Shape - Properly Overlapping */
+.heart-shape::before,
+.heart-shape::after {
+    content: '';
+    position: absolute;
+    background: linear-gradient(45deg, #ec4899, #f472b6);
+}
+
+.heart-shape::before {
+    width: 40px;
+    height: 64px;
+    left: 40px;
+    top: 0;
+    border-radius: 40px 40px 0 0;
+    transform: rotate(-45deg);
+    transform-origin: 0 100%;
+    animation: heartShapeTransformBefore 4s ease-in-out infinite;
+}
+
+.heart-shape::after {
+    width: 40px;
+    height: 64px;
+    left: 0;
+    top: 0;
+    border-radius: 40px 40px 0 0;
+    transform: rotate(45deg);
+    transform-origin: 100% 100%;
+    animation: heartShapeTransformAfter 4s ease-in-out infinite;
+}
+
+/* Cake Content Styles */
+.cake-content {
+    display: none; /* Hidden by default */
+    text-align: center;
+    padding: 2rem;
+    position: absolute; /* To overlay and transition */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    flex-direction: column; /* Added for centering when visible */
+    align-items: center; /* Added for centering when visible */
+    justify-content: center; /* Added for centering when visible */
+    background: linear-gradient(135deg, #0f172a 0%, #581c87 50%, #0f172a 100%); /* Match container background */
+    z-index: 9; /* Below confetti */
+    opacity: 0;
+    transform: translateY(100vh); /* Start off-screen at the bottom */
+    will-change: transform, opacity; /* Optimize animation performance */
+}
+
+.cake-content.show {
+    display: flex; /* Make it visible when 'show' class is present */
+    animation: scrollUpFromBottom 1s ease-out forwards; /* Scroll-up animation */
+}
+
+/* Message Box Styles */
+.message-box {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 80px;
+    height: 60px;
+    opacity: 0;
+    animation: fadeInMessageBox 1s ease-out 7.5s forwards; /* Appear after cake animation */
+    cursor: pointer;
+}
+
+.left-message {
+    left: calc(50% - 360px); /* Position left of the cake */
+}
+
+.right-message {
+    right: calc(50% - 360px); /* Position right of the cake */
+}
+
+.envelope {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #f472b6, #a855f7);
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 8px 20px rgba(236, 72, 153, 0.3);
+    transition: transform 0.3s ease;
+    overflow: hidden;
+}
+
+.envelope-body {
+    position: relative; /* keep relative */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 25px;
+    background: linear-gradient(45deg, #eaccdb, #ebc9db);
+    clip-path: polygon(0 0, 50% 30px, 100% 0);
+    transform-origin: top;
+    transition: transform 0.3s ease;
+    border-radius: 10px;
+     /* z-index: 1; 👈 lower than flap */
+}
+
+.envelope-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    background: linear-gradient(45deg, #ec4899, #f472b6);
+    clip-path: polygon(0 0, 50% 30px, 100% 0);
+    transform-origin: top;
+    transition: transform 0.3s ease;
+    border-radius: 10px;
+    /* z-index: 2; 👈 higher so it hides body */
+}
+
+.message-box:hover .envelope {
+    transform: scale(1.05);
+    overflow: visible;
+    
+}
+
+.message-box:hover .envelope-flap {
+    transform: rotateX(180deg);
+    border-radius: 10px;
+}
+
+/* Text below the message box */
+.envelope-text {
+    position: absolute;
+    top: 100%; /* directly below envelope */
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #f472b6;
+    box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+    text-shadow: 0 0 30px rgba(236, 72, 153, 0.3);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    white-space: nowrap;
+}
+
+/* Show text on hover */
+.message-box:hover .envelope-text {
+    opacity: 1;
+    transform: translateX(-50%) translateY(4px);
+}
+
+
+#cake {
+    display: block;
+    position: relative;
+    margin: -10em auto 0 auto;
+}
+
+.cake-message {
+    font-size: 3rem;
+    font-weight: bold;
+    background: linear-gradient(45deg, #f472b6, #a855f7, #ec4899, #d946ef);
+    background-size: 300% 300%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: 2rem;
+    animation: gradientShift 4s ease-in-out infinite, textGlow 2s ease-in-out infinite, fadeIn 1s ease-out 0.5s both;
+    text-shadow: 0 0 30px rgba(236, 72, 153, 0.3);
+}
+
+/* Animated HTML/CSS Cake Styles */
+.animated-cake {
+    position: relative;
+    width: 200px;
+    height: 400px;
+    overflow: hidden;
+    transform-origin: center;
+    animation: cakeBounceIn 1.5s ease-out forwards;
+    filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.3));
+}
+
+.candle {
+    background: #ffffff;
+    border-radius: 10px;
+    position: absolute;
+    top: 228px;
+    left: 50%;
+    margin-left: -2.4px;
+    margin-top: -8.33333333px;
+    width: 5px;
+    height: 35px;
+    transform: translateY(-300px);
+    -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+    -webkit-animation: in 500ms 7s ease-out forwards;
+            animation: in 500ms 7s ease-out forwards;
+}
+.candle:after, .candle:before {
+    background: rgba(255, 0, 0, 0.4);
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2.22222222px;
+}
+.candle:after {
+    top: 25%;
+    left: 0;
+}
+
+.candle:before {
+    top: 45%;
+    left: 0;
+}
+.fire {
+    border-radius: 100%;
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    margin-left: -2.6px;
+    width: 6.66666667px;
+    height: 18px;
+}
+
+.fire:nth-child(1) {
+    -webkit-animation: fire 2s 6.5s infinite;
+    animation: fire 2s 6.5s infinite;
+}
+
+.fire:nth-child(2) {
+    -webkit-animation: fire 1.5s 6.5s infinite;
+    animation: fire 1.5s 6.5s infinite;
+}
+
+.fire:nth-child(3) {
+    -webkit-animation: fire 1s 6.5s infinite;
+    animation: fire 1s 6.5s infinite;
+}
+
+.fire:nth-child(4) {
+    -webkit-animation: fire 0.5s 6.5s infinite;
+    animation: fire 0.5s 6.5s infinite;
+}
+
+.fire:nth-child(5) {
+    -webkit-animation: fire 0.2s 6.5s infinite;
+    animation: fire 0.2s 6.5s infinite;
+}
+
+@-webkit-keyframes fire {
+    0%, 100% {
+        background: rgba(254, 248, 97, 0.5);
+        box-shadow: 0 0 40px 10px rgba(248, 233, 209, 0.2);
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        background: rgba(255, 50, 0, 0.1);
+        box-shadow: 0 0 40px 20px rgba(248, 233, 209, 0.2);
+        transform: translateY(-20px) scale(0);
+    }
+}
+@keyframes fire {
+    0%, 100% {
+        background: rgba(254, 248, 97, 0.5);
+        box-shadow: 0 0 40px 10px rgba(248, 233, 209, 0.2);
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        background: rgba(255, 50, 0, 0.1);
+        box-shadow: 0 0 40px 20px rgba(248, 233, 209, 0.2);
+        transform: translateY(-20px) scale(0);
+    }
+}
+@-webkit-keyframes in {
+    to {
+        transform: translateY(0);
+    }
+}
+@keyframes in {
+    to {
+        transform: translateY(0);
+    }
+}
+.text {
+    color: #d1d1d1;
+    font-family: "Lato", sans-serif;
+    font-weight: 300;
+    font-style: italic;
+    text-align: center;
+}
+.text h1 {
+    font-size: 1.4em;
+}
+/* Keyframes for cake animations */
+@keyframes candleWiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-2deg); }
+    75% { transform: rotate(2deg); }
+}
+
+/* Enhanced Animations */
+@keyframes starTwinkle {
+    0%, 100% { opacity: 0; transform: scale(0.5); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes sparkleFloat {
+    0% { opacity: 0; transform: translateY(0px) rotate(0deg); }
+    25% { opacity: 1; transform: translateY(-20px) rotate(90deg); }
+    50% { opacity: 0.8; transform: translateY(-40px) rotate(180deg); }
+    75% { opacity: 0.6; transform: translateY(-20px) rotate(270deg); }
+    100% { opacity: 0; transform: translateY(0px) rotate(360deg); }
+}
+
+@keyframes floatingHearts {
+    0% { opacity: 0; transform: translateY(100vh) scale(0); }
+    10% { opacity: 1; transform: translateY(80vh) scale(1); }
+    90% { opacity: 1; transform: translateY(-20vh) scale(1); }
+    100% { opacity: 0; transform: translateY(-40vh) scale(0); }
+}
+
+@keyframes magicDust {
+    0% { opacity: 0; transform: translateY(100vh) translateX(0px); }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { opacity: 0; transform: translateY(-20vh) translateX(50px); }
+}
+
+/* Confetti Animation */
+@keyframes confettiFall {
+    0% {
+        opacity: 1;
+        transform: translateY(-100vh) rotate(0deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(100vh) rotate(720deg);
+    }
+}
+
+@keyframes heartLoaderCycle {
+    0%, 20% { transform: rotate(0deg) scale(0.8); }
+    10% { transform: rotate(180deg) scale(0.9); }
+    40% { transform: rotate(360deg) scale(1); }
+    50% { transform: rotate(360deg) scale(1.2); }
+    60% { transform: rotate(360deg) scale(0.8); }
+    70% { transform: rotate(360deg) scale(1.1); }
+    80% { transform: rotate(360deg) scale(1); }
+    100% { transform: rotate(720deg) scale(0.8); }
+}
+
+@keyframes glowPulse {
+    0%, 100% { transform: scale(1); opacity: 0.4; }
+    50% { transform: scale(1.2); opacity: 0.6; }
+}
+
+@keyframes contentFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes heartContainerFloat {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(2deg); }
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+@keyframes textGlow {
+    0%, 100% { filter: drop-shadow(0 0 10px rgba(236, 72, 153, 0.3)); }
+    50% { filter: drop-shadow(0 0 20px rgba(236, 72, 153, 0.6)); }
+}
+
+@keyframes subtitleFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+}
+
+@keyframes loadingPulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
+
+@keyframes pageSlideIn {
+    0% { opacity: 0; transform: translateY(50px) scale(0.9); }
+    100% { opacity: 1; transform: translateY(0px) scale(1); }
+}
+
+@keyframes mainHeartBounce {
+    0%, 100% { transform: translateY(0px) scale(1); }
+    50% { transform: translateY(-20px) scale(1.1); }
+}
+
+@keyframes titleBounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes subtitleGlow {
+    0%, 100% { text-shadow: 0 0 15px rgba(209, 213, 219, 0.4); }
+    50% { text-shadow: 0 0 25px rgba(209, 213, 219, 0.6); }
+}
+
+/* Countdown Animations */
+@keyframes countdownFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+}
+
+@keyframes countdownTitleGlow {
+    0%, 100% { text-shadow: 0 0 10px rgba(209, 213, 219, 0.3); }
+    50% { text-shadow: 0 0 20px rgba(209, 213, 219, 0.5); }
+}
+
+@keyframes countdownItemPulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 8px 32px rgba(236, 72, 153, 0.2);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 12px 40px rgba(236, 72, 153, 0.4);
+    }
+}
+
+@keyframes messageGlow {
+    0%, 100% {
+        text-shadow: 0 0 15px rgba(244, 114, 182, 0.4);
+        opacity: 0.9;
+    }
+    50% {
+        text-shadow: 0 0 25px rgba(244, 114, 182, 0.6);
+        opacity: 1;
+    }
+}
+
+/* Celebrate Button Animations */
+@keyframes celebrateButtonEntrance {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px) scale(1);
+    }
+}
+
+@keyframes celebrateButtonPulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 15px 35px rgba(236, 72, 153, 0.4);
+    }
+    50% {
+        transform: scale(1.02);
+        box-shadow: 0 20px 45px rgba(236, 72, 153, 0.6);
+    }
+}
+
+/* Heart shape transformations */
+@keyframes heartShapeTransformBefore {
+    0%, 20% {
+        width: 40px; height: 40px; border-radius: 50%;
+        left: 20px; top: 20px; transform: rotate(0deg);
+    }
+    40%, 80% {
+        width: 40px; height: 64px; border-radius: 40px 40px 0 0;
+        left: 40px; top: 0; transform: rotate(-45deg);
+    }
+    100% {
+        width: 40px; height: 40px; border-radius: 50%;
+        left: 20px; top: 20px; transform: rotate(0deg);
+    }
+}
+
+@keyframes heartShapeTransformAfter {
+    0%, 20% {
+        width: 40px; height: 40px; border-radius: 50%;
+        left: 20px; top: 20px; transform: rotate(0deg);
+    }
+    40%, 80% {
+        width: 40px; height: 64px; border-radius: 40px 40px 0 0;
+        left: 0; top: 0; transform: rotate(45deg);
+    }
+    100% {
+        width: 40px; height: 40px; border-radius: 50%;
+        left: 20px; top: 20px; transform: rotate(0deg);
+    }
+}
+
+@keyframes shadowPulse {
+    0%, 100% { opacity: 0.9; transform: translateX(-50%) scale(1); }
+    50% { opacity: 0.5; transform: translateX(-50%) scale(1.3); }
+}
+
+@keyframes fade-in {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInMessageBox {
+    from { opacity: 0; transform: translateY(-50%) scale(0.8); }
+    to { opacity: 1; transform: translateY(-50%) scale(1); }
+}
+
+/* Scroll-up Animation for Cake Content */
+@keyframes scrollUpFromBottom {
+    from { transform: translateY(100vh); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* NEW: Slide out to top animation for main page */
+@keyframes slideOutToTop {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-100vh); opacity: 0; }
+}
+
+@keyframes cakeBounceIn {
+    0% { transform: scale(0.5) translateY(50px); opacity: 0; }
+    60% { transform: scale(1.1) translateY(-10px); opacity: 1; }
+    80% { transform: scale(0.95) translateY(5px); }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .countdown-timer {
+        gap: 1rem;
+    }
+    .countdown-item {
+        min-width: 60px;
+        padding: 0.8rem 0.6rem;
+    }
+    .countdown-number {
+        font-size: 1.5rem;
+    }
+    .countdown-label {
+        font-size: 0.7rem;
+    }
+    .celebrate-btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+    .birthday-title { font-size: 3rem; }
+    .birthday-subtitle { font-size: 1.2rem; }
+    .cake-message { font-size: 2rem; }
+    .message-box {
+        width: 60px;
+        height: 45px;
+        left: calc(50% - 200px); /* Adjust for smaller screens */
+    }
+    .right-message {
+        right: calc(50% - 200px);
+    }
+}
+
+@media (min-width: 768px) {
+    .main-title { font-size: 4rem; }
+    .subtitle { font-size: 1.5rem; }
+    .birthday-title { font-size: 5rem; }
+    .birthday-subtitle { font-size: 2rem; }
+}
+
+.loading-screen { display: block; }
+.loading-screen.hide { display: none; }
