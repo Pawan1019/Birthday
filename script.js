@@ -159,16 +159,52 @@ function createConfettiExplosion() {
 
 // Audio setup
 const backgroundMusic = new Audio('Birthday.mp3'); // Your local file path
-const chimeSound = new Audio('https://www.soundjay.com/buttons/beep-01a.mp3'); // Example magical chime
 
 backgroundMusic.volume = 0.1; // Subtle volume
 backgroundMusic.loop = true;
 
-function playChime() {
-    chimeSound.volume = 0.3; // Moderate chime volume
-    chimeSound.currentTime = 0; // Reset to start
-    chimeSound.play().catch(error => console.log('Chime play failed:', error));
+// Modal management
+function showModal(modalId) {
+    const modal = document.getElementById(modalId);
+    modal.classList.add('show');
+
+    // Reset and apply typing animation for title
+    const title = modal.querySelector('.modal-title');
+    title.style.width = '0';
+    title.style.animation = 'none';
+    title.offsetHeight; // Trigger reflow
+    title.style.animation = 'typing 2s steps(' + (title.textContent.length || 20) + ') forwards, blink-caret 0.75s step-end infinite';
+
+    // Reset and apply typing animation for message
+    const message = modal.querySelector('.modal-message');
+    message.style.width = '0';
+    message.style.animation = 'none';
+    message.offsetHeight; // Trigger reflow
+    message.style.animation = 'typing 2s steps(30) forwards 0.5s, blink-caret 0.75s step-end infinite';
+
+    createConfettiExplosion();
 }
+
+// Close modal
+document.querySelectorAll('.close-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const modal = btn.closest('.modal');
+        modal.classList.remove('show');
+    });
+});
+
+// Close on outside click
+window.addEventListener('click', (e) => {
+    document.querySelectorAll('.modal').forEach(modal => {
+        if (e.target === modal && modal.classList.contains('show')) {
+            modal.classList.remove('show');
+        }
+    });
+});
+
+// Add event listeners for message boxes
+document.querySelector('.left-message').addEventListener('click', () => showModal('leftModal'));
+document.querySelector('.right-message').addEventListener('click', () => showModal('rightModal'));
 
 // Initialize enhanced particles for loading screen
 const starsContainer = document.getElementById('starsContainer');
@@ -188,7 +224,6 @@ const mainFloatingHeartsContainer = document.getElementById('mainFloatingHeartsC
 
 createEnhancedStars(mainStarsContainer, 120);
 createEnhancedSparkles(mainSparklesContainer, 60);
-playChime(); // Chime when sparkles initialize
 createFloatingHearts(mainFloatingHeartsContainer, 20);
 
 // Initialize particles for cake content page
@@ -340,8 +375,6 @@ setTimeout(() => {
     setTimeout(() => {
         loadingScreen.classList.add('hide');
         mainPage.classList.add('show');
-        playChime(); // Chime when main page loads
-
         // Start 3-second countdown when main page loads
         countdownInterval = setInterval(updateCountdown, 1000);
         updateCountdown(); // Call immediately to show initial state
