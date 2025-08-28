@@ -611,7 +611,6 @@ body {
     transform: translateX(-50%) translateY(4px);
 }
 
-
 #cake {
     display: block;
     position: relative;
@@ -1093,7 +1092,58 @@ body {
 }
 
 /* Responsive design */
+/* Mobile-specific adjustments */
 @media (max-width: 768px) {
+    .message-box {
+        position: relative; /* Change to relative for stacking */
+        width: 60px;
+        height: 45px;
+        margin: 0 auto; /* Center the message box */
+        opacity: 0; /* Visible by default on mobile */
+        animation: fadeInMessageBox 1s ease-out 7.5s forwards;
+    }
+
+    .left-message {
+        left: auto; /* Reset absolute positioning */
+        right: auto;
+        display: block; /* Show left message box */
+        position: relative; /* Ensure it follows .text */
+        margin-top: 1rem; /* Space below .text */
+    }
+
+    .right-message {
+        display: none; /* Hide right message box on mobile */
+    }
+
+    .envelope-text {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-top: 6px; /* Adjusted for smaller size */
+        font-size: 12px; /* Smaller text for mobile */
+    }
+
+    /* Adjust the .animated-cake layout to include the message box below .text */
+    .animated-cake {
+        position: relative;
+        width: 200px;
+        height: auto; /* Allow height to adjust with content */
+        margin: -10em auto 0 auto; /* Keep original margin */
+    }
+
+    .animated-cake .text {
+        margin-bottom: 1.5rem; /* Ensure space for message box below "Happy Birthday Meri Jaggu" */
+        position: relative; /* Establish context for child elements */
+    }
+
+    .animated-cake .left-message {
+        position: absolute; /* Position relative to .animated-cake */
+        left: 50%;
+        transform: translateX(-50%); /* Center horizontally */
+        top: 100%; /* Place below .text */
+        margin-top: 1.5rem; /* Additional spacing for clarity */
+    }
     .countdown-timer {
         gap: 1rem;
     }
@@ -1114,14 +1164,6 @@ body {
     .birthday-title { font-size: 3rem; }
     .birthday-subtitle { font-size: 1.2rem; }
     .cake-message { font-size: 2rem; }
-    .message-box {
-        width: 60px;
-        height: 45px;
-        left: calc(50% - 200px); /* Adjust for smaller screens */
-    }
-    .right-message {
-        right: calc(50% - 200px);
-    }
     .modal-content {
         padding: 1.5rem;
     }
