@@ -710,6 +710,7 @@ body {
 
 .arrow-button-container {
     position: absolute;
+    animation: fadeInMessageBox 1s ease-out 7.5s forwards;
     bottom: 20px; /* Distance from the bottom */
     right: 20px;  /* Distance from the right */
     z-index: 10;  /* Ensure it stays above other elements */
@@ -727,7 +728,6 @@ body {
     box-shadow: 0 8px 20px rgba(236, 72, 153, 0.3); /* Subtle shadow */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     opacity: 0;
-    animation: fadeInMessageBox 1s ease-out 7.5s forwards;
 }
 
 .arrow-button:hover {
