@@ -1185,7 +1185,7 @@ body {
     .align-left {
         left: 75px;
         right: auto;
-        bottom: -335px;
+        bottom: -330px;
         display: inline-flex;  /* match left-message row layout */
         position: relative;
         margin-top: 1rem;
