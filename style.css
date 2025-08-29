@@ -1132,7 +1132,7 @@ body {
         position: relative;
         align-items: center;
         margin-top: 1rem;
-        margin-right: 10px; /* spacing between message box & arrow */
+        margin-right: 45px; /* spacing between message box & arrow */
     }
 
     .right-message {
@@ -1175,7 +1175,7 @@ body {
         align-items: center;
         margin: 0; /* remove extra spacing */
         opacity: 0;
-        bottom: -330px;
+        bottom: -370px;
         animation: fadeInMessageBox 1s ease-out 7.5s forwards;
     }
 
