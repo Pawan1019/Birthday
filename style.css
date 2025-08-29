@@ -559,7 +559,6 @@ body {
     transform-origin: top;
     transition: transform 0.3s ease;
     border-radius: 10px;
-     /* z-index: 1; 👈 lower than flap */
 }
 
 .envelope-flap {
@@ -573,7 +572,6 @@ body {
     transform-origin: top;
     transition: transform 0.3s ease;
     border-radius: 10px;
-    /* z-index: 2; 👈 higher so it hides body */
 }
 
 .message-box:hover .envelope {
@@ -710,10 +708,11 @@ body {
 
 .arrow-button-container {
     position: absolute;
-    animation: fadeInMessageBox 1s ease-out 7.5s forwards;
     bottom: 20px; /* Distance from the bottom */
     right: 20px;  /* Distance from the right */
     z-index: 10;  /* Ensure it stays above other elements */
+    opacity: 0;
+    animation: fadeInMessageBox 1s ease-out 7.5s forwards;
 }
 
 .arrow-button {
@@ -727,7 +726,6 @@ body {
     cursor: pointer;
     box-shadow: 0 8px 20px rgba(236, 72, 153, 0.3); /* Subtle shadow */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    opacity: 0;
 }
 
 .arrow-button:hover {
@@ -1163,7 +1161,7 @@ body {
         position: relative;
     }
 
-    .animated-cake .left-message .align-left {
+    .animated-cake .left-message {
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
@@ -1175,17 +1173,15 @@ body {
     .arrow-button-container {
         display: inline-flex;  /* inline so it sits next to left-message */
         align-items: center;
-        /* width: auto;
-        height: auto; */
         margin: 0; /* remove extra spacing */
         opacity: 0;
+        bottom: -330px;
         animation: fadeInMessageBox 1s ease-out 7.5s forwards;
     }
 
     .align-left {
         left: 75px;
         right: auto;
-        bottom: -330px;
         display: inline-flex;  /* match left-message row layout */
         position: relative;
         margin-top: 1rem;
@@ -1195,7 +1191,7 @@ body {
         background: linear-gradient(45deg, #f472b6, #a855f7);
         border-radius: 10px;
         width: 60px; /* Smaller size for mobile */
-        height: 48px; /* Smaller size for mobile */
+        height: 47px; /* Smaller size for mobile */
         font-size: 2rem; /* Adjust icon size */
         color: white;
         font-weight: bold;
