@@ -708,6 +708,33 @@ body {
     animation: fire 0.2s 6.5s infinite;
 }
 
+.arrow-button-container {
+    position: absolute;
+    bottom: 20px; /* Distance from the bottom */
+    right: 20px;  /* Distance from the right */
+    z-index: 10;  /* Ensure it stays above other elements */
+}
+
+.arrow-button {
+    background: linear-gradient(45deg, #f472b6, #a855f7); /* Match the theme */
+    border: none;
+    border-radius: 10px; /* Circular button */
+    width: 40px; /* Adjust size as needed */
+    height: 40px; /* Adjust size as needed */
+    font-size: 1.2rem; /* Adjust icon size */
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(236, 72, 153, 0.3); /* Subtle shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0;
+    animation: fadeInMessageBox 1s ease-out 7.5s forwards;
+}
+
+.arrow-button:hover {
+    transform: scale(1.1); /* Slight scale on hover */
+    box-shadow: 0 12px 25px rgba(236, 72, 153, 0.5);
+}
+
 @-webkit-keyframes fire {
     0%, 100% {
         background: rgba(254, 248, 97, 0.5);
@@ -1092,27 +1119,26 @@ body {
 }
 
 /* Responsive design */
-/* Mobile-specific adjustments */
 @media (max-width: 768px) {
     .message-box {
-        position: relative; /* Change to relative for stacking */
+        position: relative;
         width: 60px;
         height: 45px;
-        margin: 0 auto; /* Center the message box */
-        opacity: 0; /* Visible by default on mobile */
-        animation: fadeInMessageBox 1s ease-out 7.5s forwards;
+        margin: 0 auto;
+        opacity: 0;
+        animation: fadeInMessageBox 1s ease-out 1.5s forwards;
     }
 
     .left-message {
-        left: auto; /* Reset absolute positioning */
-        right: auto;
-        display: block; /* Show left message box */
-        position: relative; /* Ensure it follows .text */
-        margin-top: 1rem; /* Space below .text */
+        display: inline-flex;   /* inline flex to allow side by side */
+        position: relative;
+        align-items: center;
+        margin-top: 1rem;
+        margin-right: 10px; /* spacing between message box & arrow */
     }
 
     .right-message {
-        display: none; /* Hide right message box on mobile */
+        display: none;
     }
 
     .envelope-text {
@@ -1120,56 +1146,104 @@ body {
         top: 100%;
         left: 50%;
         transform: translateX(-50%);
-        margin-top: 6px; /* Adjusted for smaller size */
-        font-size: 12px; /* Smaller text for mobile */
+        margin-top: 6px;
+        font-size: 12px;
+        white-space: nowrap;
     }
 
-    /* Adjust the .animated-cake layout to include the message box below .text */
     .animated-cake {
         position: relative;
         width: 200px;
-        height: auto; /* Allow height to adjust with content */
-        margin: -10em auto 0 auto; /* Keep original margin */
+        height: auto;
+        margin: -10em auto 0 auto;
     }
 
     .animated-cake .text {
-        margin-bottom: 1.5rem; /* Ensure space for message box below "Happy Birthday Meri Jaggu" */
-        position: relative; /* Establish context for child elements */
+        margin-bottom: 1.5rem;
+        position: relative;
     }
 
-    .animated-cake .left-message {
-        position: absolute; /* Position relative to .animated-cake */
+    .animated-cake .left-message .align-left {
+        position: absolute;
         left: 50%;
-        transform: translateX(-50%); /* Center horizontally */
-        top: 100%; /* Place below .text */
-        margin-top: 1.5rem; /* Additional spacing for clarity */
+        transform: translateX(-50%);
+        top: 100%;
+        margin-top: 1.5rem;
     }
+
+    /* Arrow button container styles */
+    .arrow-button-container {
+        display: inline-flex;  /* inline so it sits next to left-message */
+        align-items: center;
+        /* width: auto;
+        height: auto; */
+        margin: 0; /* remove extra spacing */
+        opacity: 0;
+        animation: fadeInMessageBox 1s ease-out 1.5s forwards;
+    }
+
+    .align-left {
+        left: 75px;
+        right: auto;
+        bottom: -329px;
+        display: inline-flex;  /* match left-message row layout */
+        position: relative;
+        margin-top: 1rem;
+    }
+
+    .arrow-button {
+        background: linear-gradient(45deg, #f472b6, #a855f7);
+        border-radius: 10px;
+        width: 60px; /* Smaller size for mobile */
+        height: 48px; /* Smaller size for mobile */
+        font-size: 2rem; /* Adjust icon size */
+        color: white;
+        font-weight: bold;
+        box-shadow: 0 6px 15px rgba(236, 72, 153, 0.3);
+    }
+
     .countdown-timer {
         gap: 1rem;
     }
+
     .countdown-item {
         min-width: 60px;
         padding: 0.8rem 0.6rem;
     }
+
     .countdown-number {
         font-size: 1.5rem;
     }
+
     .countdown-label {
         font-size: 0.7rem;
     }
+
     .celebrate-btn {
         padding: 0.6rem 1.2rem;
         font-size: 0.9rem;
     }
-    .birthday-title { font-size: 3rem; }
-    .birthday-subtitle { font-size: 1.2rem; }
-    .cake-message { font-size: 2rem; }
+
+    .birthday-title {
+        font-size: 3rem;
+    }
+
+    .birthday-subtitle {
+        font-size: 1.2rem;
+    }
+
+    .cake-message {
+        font-size: 2rem;
+    }
+
     .modal-content {
         padding: 1.5rem;
     }
+
     .modal-title {
         font-size: 1.5rem;
     }
+
     .modal-message {
         font-size: 1rem;
     }
