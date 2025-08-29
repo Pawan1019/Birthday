@@ -1126,7 +1126,7 @@ body {
         height: 45px;
         margin: 0 auto;
         opacity: 0;
-        animation: fadeInMessageBox 1s ease-out 1.5s forwards;
+        animation: fadeInMessageBox 1s ease-out 7.5s forwards;
     }
 
     .left-message {
@@ -1179,7 +1179,7 @@ body {
         height: auto; */
         margin: 0; /* remove extra spacing */
         opacity: 0;
-        animation: fadeInMessageBox 1s ease-out 1.5s forwards;
+        animation: fadeInMessageBox 1s ease-out 7.5s forwards;
     }
 
     .align-left {
