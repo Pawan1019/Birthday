@@ -197,6 +197,7 @@ function showMediaModal() {
     requestAnimationFrame(() => {
         modal.classList.add('show');
     });
+    createConfettiExplosion()
 }
 
 // Show image section
@@ -204,9 +205,15 @@ function showImageSection() {
     const modal = document.getElementById('mediaSelectionModal');
     const cakeContent = document.getElementById('cakeContent');
     const imageContent = document.getElementById('imageContent');
+    const goToVideosBtn = document.querySelector('.image-content .go-to-videos-btn');
+    const retryBtn = document.querySelector('.image-content .retry-btn');
 
     // Set navigation path
-    navigationPath = "viaImages";
+    navigationPath = "direct";
+
+    // Show go to videos button, hide retry button
+    goToVideosBtn.style.display = 'block';
+    retryBtn.style.display = 'none';
 
     // Fade out modal
     modal.classList.add('fadeOut');
@@ -228,6 +235,7 @@ function showImageSection() {
             imageContent.classList.add('show');
         });
     }, 500); // Match fadeOut animation duration
+    createConfettiExplosion()
 }
 
 // Show video section from modal
@@ -236,7 +244,7 @@ function showVideoSectionFromModal() {
     const cakeContent = document.getElementById('cakeContent');
     const videoContent = document.getElementById('videoContent');
     const goToImagesBtn = document.querySelector('.go-to-images-btn');
-    const retryBtn = document.querySelector('.retry-btn');
+    const retryBtn = document.querySelector('.video-content .retry-btn');
 
     // Set navigation path
     navigationPath = "direct";
@@ -265,6 +273,7 @@ function showVideoSectionFromModal() {
             videoContent.classList.add('show');
         });
     }, 500); // Match fadeOut animation duration
+    createConfettiExplosion()
 }
 
 // Show video section
@@ -272,7 +281,7 @@ function showVideoSection() {
     const imageContent = document.getElementById('imageContent');
     const videoContent = document.getElementById('videoContent');
     const goToImagesBtn = document.querySelector('.go-to-images-btn');
-    const retryBtn = document.querySelector('.retry-btn');
+    const retryBtn = document.querySelector('.video-content .retry-btn');
 
     // Set navigation path
     navigationPath = "viaImages";
@@ -297,12 +306,22 @@ function showVideoSection() {
             videoContent.classList.add('show');
         });
     }, 800);
+    createConfettiExplosion()
 }
 
 // Show image section from video content
 function showImageSectionFromVideo() {
     const videoContent = document.getElementById('videoContent');
     const imageContent = document.getElementById('imageContent');
+    const goToVideosBtn = document.querySelector('.image-content .go-to-videos-btn');
+    const retryBtn = document.querySelector('.image-content .retry-btn');
+
+    // Set navigation path
+    navigationPath = "viaVideos";
+
+    // Show retry button, hide go to videos button
+    goToVideosBtn.style.display = 'none';
+    retryBtn.style.display = 'block';
 
     // Animate video out
     videoContent.classList.add('slide-out-to-right');
@@ -320,6 +339,7 @@ function showImageSectionFromVideo() {
             imageContent.classList.add('show');
         });
     }, 800);
+    createConfettiExplosion()
 }
 
 // Retry page
@@ -406,6 +426,28 @@ createEnhancedStars(cakeStarsContainer, 100);
 createEnhancedSparkles(cakeSparklesContainer, 50);
 createFloatingHearts(cakeFloatingHeartsContainer, 18);
 createMagicDust(cakeMagicDustContainer, 25);
+
+// Initialize particles for image content page
+const imageStarsContainer = document.getElementById('imageStarsContainer');
+const imageSparklesContainer = document.getElementById('imageSparklesContainer');
+const imageFloatingHeartsContainer = document.getElementById('imageFloatingHeartsContainer');
+const imageMagicDustContainer = document.getElementById('imageMagicDustContainer');
+
+createEnhancedStars(imageStarsContainer, 100);
+createEnhancedSparkles(imageSparklesContainer, 50);
+createFloatingHearts(imageFloatingHeartsContainer, 18);
+createMagicDust(imageMagicDustContainer, 25);
+
+// Initialize particles for image content page
+const videoStarsContainer = document.getElementById('videoStarsContainer');
+const videoSparklesContainer = document.getElementById('videoSparklesContainer');
+const videoFloatingHeartsContainer = document.getElementById('videoFloatingHeartsContainer');
+const videoMagicDustContainer = document.getElementById('videoMagicDustContainer');
+
+createEnhancedStars(videoStarsContainer, 100);
+createEnhancedSparkles(videoSparklesContainer, 50);
+createFloatingHearts(videoFloatingHeartsContainer, 18);
+createMagicDust(videoMagicDustContainer, 25);
 
 // 3-Second Countdown Timer
 let countdownSeconds = 3;
