@@ -166,7 +166,11 @@ backgroundMusic.loop = true;
 // Modal management
 function showModal(modalId) {
     const modal = document.getElementById(modalId);
-    modal.classList.add('show');
+    modal.style.display = 'flex'; // Ensure display is set before animation
+    modal.classList.remove('fadeOut'); // Clear any previous fadeOut
+    requestAnimationFrame(() => {
+        modal.classList.add('show');
+    });
 
     // Reset and apply typing animation for title
     const title = modal.querySelector('.modal-title');
@@ -188,22 +192,164 @@ function showModal(modalId) {
 // New function for media modal without animations
 function showMediaModal() {
     const modal = document.getElementById('mediaSelectionModal');
-    modal.classList.add('show');
+    modal.style.display = 'flex'; // Ensure display is set before animation
+    modal.classList.remove('fadeOut'); // Clear any previous fadeOut
+    requestAnimationFrame(() => {
+        modal.classList.add('show');
+    });
+}
+
+// Show image section
+function showImageSection() {
+    const modal = document.getElementById('mediaSelectionModal');
+    const cakeContent = document.getElementById('cakeContent');
+    const imageContent = document.getElementById('imageContent');
+
+    // Set navigation path
+    navigationPath = "viaImages";
+
+    // Fade out modal
+    modal.classList.add('fadeOut');
+    modal.classList.remove('show');
+
+    setTimeout(() => {
+        // Hide modal
+        modal.style.display = 'none';
+        modal.classList.remove('fadeOut');
+
+        // Hide cake content
+        cakeContent.style.display = 'none';
+        cakeContent.classList.remove('show', 'slideInFromRight', 'slide-out-to-right');
+
+        // Show image content
+        imageContent.style.display = 'flex';
+        imageContent.classList.remove('slide-out-to-left');
+        requestAnimationFrame(() => {
+            imageContent.classList.add('show');
+        });
+    }, 500); // Match fadeOut animation duration
+}
+
+// Show video section from modal
+function showVideoSectionFromModal() {
+    const modal = document.getElementById('mediaSelectionModal');
+    const cakeContent = document.getElementById('cakeContent');
+    const videoContent = document.getElementById('videoContent');
+    const goToImagesBtn = document.querySelector('.go-to-images-btn');
+    const retryBtn = document.querySelector('.retry-btn');
+
+    // Set navigation path
+    navigationPath = "direct";
+
+    // Show go to images button, hide retry button
+    goToImagesBtn.style.display = 'block';
+    retryBtn.style.display = 'none';
+
+    // Fade out modal
+    modal.classList.add('fadeOut');
+    modal.classList.remove('show');
+
+    setTimeout(() => {
+        // Hide modal
+        modal.style.display = 'none';
+        modal.classList.remove('fadeOut');
+
+        // Hide cake content
+        cakeContent.style.display = 'none';
+        cakeContent.classList.remove('show', 'slideInFromRight', 'slide-out-to-right');
+
+        // Show video content
+        videoContent.style.display = 'flex';
+        videoContent.classList.remove('slide-out-to-left', 'slide-out-to-right');
+        requestAnimationFrame(() => {
+            videoContent.classList.add('show');
+        });
+    }, 500); // Match fadeOut animation duration
+}
+
+// Show video section
+function showVideoSection() {
+    const imageContent = document.getElementById('imageContent');
+    const videoContent = document.getElementById('videoContent');
+    const goToImagesBtn = document.querySelector('.go-to-images-btn');
+    const retryBtn = document.querySelector('.retry-btn');
+
+    // Set navigation path
+    navigationPath = "viaImages";
+
+    // Show retry button, hide go to images button
+    goToImagesBtn.style.display = 'none';
+    retryBtn.style.display = 'block';
+
+    // Animate image out
+    imageContent.classList.add('slide-out-to-left');
+    imageContent.classList.remove('show');
+
+    setTimeout(() => {
+        // Hide image content
+        imageContent.style.display = 'none';
+        imageContent.classList.remove('slide-out-to-left');
+
+        // Show video content
+        videoContent.style.display = 'flex';
+        videoContent.classList.remove('slide-out-to-left', 'slide-out-to-right');
+        requestAnimationFrame(() => {
+            videoContent.classList.add('show');
+        });
+    }, 800);
+}
+
+// Show image section from video content
+function showImageSectionFromVideo() {
+    const videoContent = document.getElementById('videoContent');
+    const imageContent = document.getElementById('imageContent');
+
+    // Animate video out
+    videoContent.classList.add('slide-out-to-right');
+    videoContent.classList.remove('show');
+
+    setTimeout(() => {
+        // Hide video content
+        videoContent.style.display = 'none';
+        videoContent.classList.remove('slide-out-to-right');
+
+        // Show image content
+        imageContent.style.display = 'flex';
+        imageContent.classList.remove('slide-out-to-left');
+        requestAnimationFrame(() => {
+            imageContent.classList.add('show');
+        });
+    }, 800);
+}
+
+// Retry page
+function retryPage() {
+    window.location.reload();
 }
 
 // Close modal
 document.querySelectorAll('.close-btn, .media-close-btn').forEach(btn => {
     btn.addEventListener('click', () => {
         const modal = btn.closest('.modal, .media-modal');
+        modal.classList.add('fadeOut');
         modal.classList.remove('show');
+        setTimeout(() => {
+            modal.style.display = 'none';
+            modal.classList.remove('fadeOut');
+        }, 500);
     });
 });
 
 // Close on outside click
 window.addEventListener('click', (e) => {
-    document.querySelectorAll('.modal').forEach(modal => {
+    document.querySelectorAll('.modal, .media-modal').forEach(modal => {
         if (e.target === modal && modal.classList.contains('show')) {
+            modal.classList.add('fadeOut');
             modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+                modal.classList.remove('fadeOut');
+            }, 500);
         }
     });
 });
@@ -214,6 +360,21 @@ document.querySelector('.right-message').addEventListener('click', () => showMod
 
 // Add event listener for arrow button
 document.querySelector('.arrow-button').addEventListener('click', showMediaModal);
+
+// Add event listener for images button
+document.querySelector('.images-btn').addEventListener('click', showImageSection);
+
+// Add event listener for videos button
+document.querySelector('.videos-btn').addEventListener('click', showVideoSectionFromModal);
+
+// Add event listener for go to videos button
+document.querySelector('.go-to-videos-btn').addEventListener('click', showVideoSection);
+
+// Add event listener for go to images button
+document.querySelector('.go-to-images-btn').addEventListener('click', showImageSectionFromVideo);
+
+// Add event listener for retry button
+document.querySelector('.retry-btn').addEventListener('click', retryPage);
 
 // Initialize enhanced particles for loading screen
 const starsContainer = document.getElementById('starsContainer');
@@ -373,6 +534,14 @@ const messageTimer = setInterval(() => {
     if (messageIndex < loadingMessages.length - 1) {
         messageIndex++;
         loadingStatus.textContent = loadingMessages[messageIndex];
+    }else {
+        clearInterval(messageTimer);
+        loadingScreen.classList.add('fade-out');
+        setTimeout(() => {
+            loadingScreen.style.display = 'none';
+            mainPage.style.display = 'flex';
+            countdownInterval = setInterval(updateCountdown, 1000);
+        }, 1000);
     }
 }, 1000);
 
