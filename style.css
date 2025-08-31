@@ -1033,15 +1033,14 @@ body {
 }
 
 .modal-content {
-    background: linear-gradient(135deg, #0f172a, #581c87);
-    padding: 2rem;
-    border-radius: 15px;
-    text-align: center;
-    position: relative;
-    box-shadow: 0 0 20px rgba(236, 72, 153, 0.5);
-    animation: scaleIn 0.5s ease-out forwards;
-    max-width: 400px;
-    width: 90%;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.1); /* Lighter transparency for better contrast */
+    border-radius: 15px; /* Softer corners */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Softer border */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Reduced shadow for subtlety */
+    color: #fff; /* Ensure text is readable */
+    backdrop-filter: blur(15px) saturate(180%); /* Enhance vibrancy */
+    -webkit-backdrop-filter: blur(15px) saturate(180%);
 }
 
 .close-btn {
@@ -1082,6 +1081,96 @@ body {
     white-space: pre;
     border-right: 2px solid #f472b6;
     padding-right: 2px;
+}
+
+/* New Media Selection Modal Styles */
+.media-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.media-modal.show {
+    display: flex;
+    animation: fadeInModal 0.5s ease-out forwards;
+}
+
+.media-modal-content {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 2rem;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 8px 32px rgba(236, 72, 153, 0.3);
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: center;
+}
+
+.media-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5rem;
+    color: #f472b6;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.media-close-btn:hover {
+    transform: scale(1.2);
+}
+
+.media-modal-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #f472b6;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 15px rgba(244, 114, 182, 0.4);
+}
+
+.media-modal-message {
+    font-size: 1.2rem;
+    color: #d1d5db;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 10px rgba(209, 213, 219, 0.4);
+}
+
+.media-modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.media-btn {
+    background: linear-gradient(45deg, #f472b6, #a855f7);
+    border: none;
+    border-radius: 10px;
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(236, 72, 153, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.media-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 25px rgba(236, 72, 153, 0.5);
+}
+
+.media-btn:active {
+    transform: scale(1);
 }
 
 /* Typing Animation */
@@ -1234,6 +1323,13 @@ body {
 
     .modal-content {
         padding: 1.5rem;
+        background: rgba(255, 255, 255, 0.1); /* Lighter transparency for better contrast */
+        border-radius: 15px; /* Softer corners */
+        border: 1px solid rgba(255, 255, 255, 0.3); /* Softer border */
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Reduced shadow for subtlety */
+        color: #fff; /* Ensure text is readable */
+        backdrop-filter: blur(15px) saturate(180%); /* Enhance vibrancy */
+        -webkit-backdrop-filter: blur(15px) saturate(180%);
     }
 
     .modal-title {
@@ -1243,7 +1339,21 @@ body {
     .modal-message {
         font-size: 1rem;
     }
+
+    .media-modal-title {
+        font-size: 1.5rem;
+    }
+
+    .media-modal-message {
+        font-size: 1rem;
+    }
+
+    .media-btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
 }
+
 
 @media (min-width: 768px) {
     .main-title { font-size: 4rem; }
