@@ -185,10 +185,16 @@ function showModal(modalId) {
     createConfettiExplosion();
 }
 
+// New function for media modal without animations
+function showMediaModal() {
+    const modal = document.getElementById('mediaSelectionModal');
+    modal.classList.add('show');
+}
+
 // Close modal
-document.querySelectorAll('.close-btn').forEach(btn => {
+document.querySelectorAll('.close-btn, .media-close-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-        const modal = btn.closest('.modal');
+        const modal = btn.closest('.modal, .media-modal');
         modal.classList.remove('show');
     });
 });
@@ -205,6 +211,9 @@ window.addEventListener('click', (e) => {
 // Add event listeners for message boxes
 document.querySelector('.left-message').addEventListener('click', () => showModal('leftModal'));
 document.querySelector('.right-message').addEventListener('click', () => showModal('rightModal'));
+
+// Add event listener for arrow button
+document.querySelector('.arrow-button').addEventListener('click', showMediaModal);
 
 // Initialize enhanced particles for loading screen
 const starsContainer = document.getElementById('starsContainer');
