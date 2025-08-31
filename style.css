@@ -1235,6 +1235,7 @@ body {
     border: 2px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 4px 10px rgba(236, 72, 153, 0.3);
     transition: transform 0.3s ease;
+    z-index: 1;
 }
 
 .gallery-image:hover {
@@ -1287,6 +1288,7 @@ body {
     border-radius: 10px;
     border: 2px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 4px 10px rgba(236, 72, 153, 0.3);
+    z-index: 1;
 }
 
 /* Go to Videos Button */
