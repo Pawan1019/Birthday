@@ -347,108 +347,60 @@ function retryPage() {
     window.location.reload();
 }
 
-// Initialize event listeners
-function initializeEventListeners() {
-    // Close modal
-    document.querySelectorAll('.close-btn, .media-close-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const modal = btn.closest('.modal, .media-modal');
+// Close modal
+document.querySelectorAll('.close-btn, .media-close-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const modal = btn.closest('.modal, .media-modal');
+        modal.classList.add('fadeOut');
+        modal.classList.remove('show');
+        setTimeout(() => {
+            modal.style.display = 'none';
+            modal.classList.remove('fadeOut');
+        }, 500);
+    });
+});
+
+// Close on outside click
+window.addEventListener('click', (e) => {
+    document.querySelectorAll('.modal, .media-modal').forEach(modal => {
+        if (e.target === modal && modal.classList.contains('show')) {
             modal.classList.add('fadeOut');
             modal.classList.remove('show');
             setTimeout(() => {
                 modal.style.display = 'none';
                 modal.classList.remove('fadeOut');
             }, 500);
-        });
+        }
     });
+});
 
-    // Close on outside click
-    window.addEventListener('click', (e) => {
-        document.querySelectorAll('.modal, .media-modal').forEach(modal => {
-            if (e.target === modal && modal.classList.contains('show')) {
-                modal.classList.add('fadeOut');
-                modal.classList.remove('show');
-                setTimeout(() => {
-                    modal.style.display = 'none';
-                    modal.classList.remove('fadeOut');
-                }, 500);
-            }
-        });
+// Add event listeners for message boxes
+document.querySelector('.left-message').addEventListener('click', () => showModal('leftModal'));
+document.querySelector('.right-message').addEventListener('click', () => showModal('rightModal'));
+
+// Add event listener for arrow button
+document.querySelector('.arrow-button').addEventListener('click', showMediaModal);
+
+// Add event listener for images button
+document.querySelector('.images-btn').addEventListener('click', showImageSection);
+
+// Add event listener for videos button
+document.querySelector('.videos-btn').addEventListener('click', showVideoSectionFromModal);
+
+// Add event listener for go to videos button
+document.querySelector('.go-to-videos-btn').addEventListener('click', showVideoSection);
+
+// Add event listener for go to images button
+document.querySelector('.go-to-images-btn').addEventListener('click', showImageSectionFromVideo);
+
+// Add event listeners for retry buttons
+document.querySelectorAll('.retry-btn').forEach(btn => {
+    btn.addEventListener('click', retryPage);
+    btn.addEventListener('touchstart', (e) => {
+        e.preventDefault(); // Prevent default touch behavior (e.g., scrolling)
+        retryPage();
     });
-
-    // Add event listeners for message boxes
-    const leftMessage = document.querySelector('.left-message');
-    if (leftMessage) {
-        leftMessage.addEventListener('click', () => showModal('leftModal'));
-    } else {
-        console.error('Left message element not found');
-    }
-
-    const rightMessage = document.querySelector('.right-message');
-    if (rightMessage) {
-        rightMessage.addEventListener('click', () => showModal('rightModal'));
-    } else {
-        console.error('Right message element not found');
-    }
-
-    // Add event listener for arrow button
-    const arrowButton = document.querySelector('.arrow-button');
-    if (arrowButton) {
-        arrowButton.addEventListener('click', showMediaModal);
-    } else {
-        console.error('Arrow button element not found');
-    }
-
-    // Add event listener for images button
-    const imagesBtn = document.querySelector('.images-btn');
-    if (imagesBtn) {
-        imagesBtn.addEventListener('click', showImageSection);
-    } else {
-        console.error('Images button element not found');
-    }
-
-    // Add event listener for videos button
-    const videosBtn = document.querySelector('.videos-btn');
-    if (videosBtn) {
-        videosBtn.addEventListener('click', showVideoSectionFromModal);
-    } else {
-        console.error('Videos button element not found');
-    }
-
-    // Add event listener for go to videos button
-    const goToVideosBtn = document.querySelector('.go-to-videos-btn');
-    if (goToVideosBtn) {
-        goToVideosBtn.addEventListener('click', showVideoSection);
-    } else {
-        console.error('Go to videos button element not found');
-    }
-
-    // Add event listener for go to images button
-    const goToImagesBtn = document.querySelector('.go-to-images-btn');
-    if (goToImagesBtn) {
-        goToImagesBtn.addEventListener('click', showImageSectionFromVideo);
-    } else {
-        console.error('Go to images button element not found');
-    }
-
-    // Add event listeners for retry buttons
-    const retryButtons = document.querySelectorAll('.retry-btn');
-    if (retryButtons.length > 0) {
-        retryButtons.forEach((btn, index) => {
-            btn.addEventListener('click', () => {
-                console.log(`Retry button ${index + 1} clicked`);
-                retryPage();
-            });
-            btn.addEventListener('touchstart', (e) => {
-                e.preventDefault(); // Prevent default touch behavior
-                console.log(`Retry button ${index + 1} touched`);
-                retryPage();
-            });
-        });
-    } else {
-        console.error('No retry buttons found');
-    }
-}
+});
 
 // Initialize enhanced particles for loading screen
 const starsContainer = document.getElementById('starsContainer');
