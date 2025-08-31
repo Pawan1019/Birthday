@@ -706,33 +706,6 @@ body {
     animation: fire 0.2s 6.5s infinite;
 }
 
-.arrow-button-container {
-    position: absolute;
-    bottom: 20px; /* Distance from the bottom */
-    right: 20px;  /* Distance from the right */
-    z-index: 10;  /* Ensure it stays above other elements */
-    opacity: 0;
-    animation: fadeInMessageBox 1s ease-out 7.5s forwards;
-}
-
-.arrow-button {
-    background: linear-gradient(45deg, #f472b6, #a855f7); /* Match the theme */
-    border: none;
-    border-radius: 10px; /* Circular button */
-    width: 40px; /* Adjust size as needed */
-    height: 40px; /* Adjust size as needed */
-    font-size: 1.2rem; /* Adjust icon size */
-    color: white;
-    cursor: pointer;
-    box-shadow: 0 8px 20px rgba(236, 72, 153, 0.3); /* Subtle shadow */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.arrow-button:hover {
-    transform: scale(1.1); /* Slight scale on hover */
-    box-shadow: 0 12px 25px rgba(236, 72, 153, 0.5);
-}
-
 @-webkit-keyframes fire {
     0%, 100% {
         background: rgba(254, 248, 97, 0.5);
@@ -1032,6 +1005,10 @@ body {
     animation: fadeInModal 0.5s ease-out forwards;
 }
 
+.modal.fadeOut{
+    animation: fadeOut 0.5s ease-out forwards;
+}
+
 .modal-content {
     padding: 1.5rem;
     background: rgba(255, 255, 255, 0.1); /* Lighter transparency for better contrast */
@@ -1083,6 +1060,34 @@ body {
     padding-right: 2px;
 }
 
+/* Arrow Button */
+.arrow-button-container {
+    position: absolute;
+    bottom: 20px; /* Distance from the bottom */
+    right: 20px;  /* Distance from the right */
+    z-index: 10;  /* Ensure it stays above other elements */
+    opacity: 0;
+    animation: fadeInMessageBox 1s ease-out 7.5s forwards;
+}
+
+.arrow-button {
+    background: linear-gradient(45deg, #f472b6, #a855f7); /* Match the theme */
+    border: none;
+    border-radius: 10px; /* Circular button */
+    width: 40px; /* Adjust size as needed */
+    height: 40px; /* Adjust size as needed */
+    font-size: 1.2rem; /* Adjust icon size */
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(236, 72, 153, 0.3); /* Subtle shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.arrow-button:hover {
+    transform: scale(1.1); /* Slight scale on hover */
+    box-shadow: 0 12px 25px rgba(236, 72, 153, 0.5);
+}
+
 /* New Media Selection Modal Styles */
 .media-modal {
     display: none;
@@ -1096,11 +1101,17 @@ body {
     z-index: 1000;
     align-items: center;
     justify-content: center;
+    will-change: opacity;
+    transition: opacity 0.5s ease-out;
 }
 
 .media-modal.show {
     display: flex;
     animation: fadeInModal 0.5s ease-out forwards;
+}
+
+.media-modal.fadeOut {
+    animation: fadeOut 0.5s ease-out forwards;
 }
 
 .media-modal-content {
@@ -1173,6 +1184,180 @@ body {
     transform: scale(1);
 }
 
+/* Image Content Styles */
+.image-content {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    will-change: transform, opacity;
+    transition: transform 0.8s ease-out, opacity 0.8s ease-out;
+}
+
+.image-content.show {
+    display: flex;
+    animation: slideInFromLeft 0.8s ease-out forwards;
+}
+
+.image-content.slide-out-to-left {
+    animation: slideOutToLeft 0.8s ease-out forwards;
+}
+
+.image-message {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #f472b6;
+    text-shadow: 0 0 15px rgba(244, 114, 182, 0.4);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.image-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.gallery-image {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 10px rgba(236, 72, 153, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.gallery-image:hover {
+    transform: scale(1.05);
+}
+
+/* Video Content Styles */
+.video-content {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 4;
+    will-change: transform, opacity;
+    transition: transform 0.8s ease-out, opacity 0.8s ease-out;
+}
+
+.video-content.show {
+    display: flex;
+    animation: slideInFromRight 0.8s ease-out forwards;
+}
+
+.video-content.slide-out-to-left {
+    animation: slideOutToLeft 0.8s ease-out forwards;
+}
+
+.video-content.slide-out-to-right {
+    animation: slideOutToRight 0.8s ease-out forwards;
+}
+
+.video-message {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #f472b6;
+    text-shadow: 0 0 15px rgba(244, 114, 182, 0.4);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.video-frame {
+    width: 100%;
+    max-width: 640px;
+    height: 360px;
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 10px rgba(236, 72, 153, 0.3);
+}
+
+/* Go to Videos Button */
+.go-to-videos-btn {
+    background: linear-gradient(45deg, #f472b6, #a855f7);
+    border: none;
+    border-radius: 10px;
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(236, 72, 153, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.go-to-videos-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 25px rgba(236, 72, 153, 0.5);
+}
+
+.go-to-videos-btn:active {
+    transform: scale(1);
+}
+
+/* Go to Images Button */
+.go-to-images-btn {
+    background: linear-gradient(45deg, #f472b6, #a855f7);
+    border: none;
+    border-radius: 10px;
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(236, 72, 153, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.go-to-images-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 25px rgba(236, 72, 153, 0.5);
+}
+
+.go-to-images-btn:active {
+    transform: scale(1);
+}
+
+/* Retry Button */
+.retry-btn {
+    background: linear-gradient(45deg, #f472b6, #a855f7);
+    border: none;
+    border-radius: 10px;
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(236, 72, 153, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.retry-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 25px rgba(236, 72, 153, 0.5);
+}
+
+.retry-btn:active {
+    transform: scale(1);
+}
+
 /* Typing Animation */
 @keyframes typing {
     from { width: 0; }
@@ -1203,6 +1388,32 @@ body {
 @keyframes messageFloat {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-5px); }
+}
+
+/* Image Modal Animation */
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@keyframes slideInFromLeft {
+    0% { transform: translateX(-100%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideOutToRight {
+    0% { transform: translateX(0); opacity: 1; }
+    100% { transform: translateX(100%); opacity: 0; }
+}
+
+@keyframes slideInFromRight {
+    0% { transform: translateX(100%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideOutToLeft {
+    0% { transform: translateX(0); opacity: 1; }
+    100% { transform: translateX(-100%); opacity: 0; }
 }
 
 /* Responsive design */
@@ -1349,6 +1560,29 @@ body {
     }
 
     .media-btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+
+    .image-message {
+        font-size: 2rem;
+    }
+
+    .gallery-image {
+        width: 150px;
+        height: 150px;
+    }
+
+    .video-message {
+        font-size: 2rem;
+    }
+
+    .video-frame {
+        max-width: 90%;
+        height: auto;
+    }
+
+    .go-to-videos-btn, .go-to-images-btn, .retry-btn  {
         padding: 0.6rem 1.2rem;
         font-size: 0.9rem;
     }
