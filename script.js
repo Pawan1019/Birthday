@@ -162,6 +162,19 @@ const backgroundMusic = new Audio('Birthday.mp3'); // Your local file path
 backgroundMusic.volume = 0.1; // Subtle volume
 backgroundMusic.loop = true;
 
+// NEW: Image section music setup
+const imageMusic = new Audio('ImageMusic.mp3'); // Replace with actual file path
+imageMusic.volume = 0.1;
+imageMusic.loop = true;
+
+// NEW: Function to stop all music
+function stopAllMusic() {
+    backgroundMusic.pause();
+    backgroundMusic.currentTime = 0; // Reset to start
+    imageMusic.pause();
+    imageMusic.currentTime = 0; // Reset to start
+}
+
 // Modal management
 function showModal(modalId) {
     const modal = document.getElementById(modalId);
@@ -184,7 +197,6 @@ function showModal(modalId) {
     message.style.animation = 'none';
     message.offsetHeight; // Trigger reflow
     message.style.animation = 'typing 2s steps(30) forwards 0.5s, blink-caret 0.75s step-end infinite';
-
     createConfettiExplosion();
 }
 
@@ -214,6 +226,13 @@ function showImageSection() {
     goToVideosBtn.style.display = 'block';
     retryBtn.style.display = 'none';
 
+    // NEW: Stop Birthday.mp3 and play Image music
+    stopAllMusic();
+    imageMusic.play().catch(error => {
+        console.log('Image music play failed:', error.message);
+        alert(`Image music failed to play. Error: ${error.message}. Path: ${imageMusic.src}. Please ensure the file exists.`);
+    });
+
     // Fade out modal
     modal.classList.add('fadeOut');
     modal.classList.remove('show');
@@ -232,6 +251,10 @@ function showImageSection() {
         imageContent.classList.remove('slide-out-to-left');
         requestAnimationFrame(() => {
             imageContent.classList.add('show');
+            // Start carousel animation after 2 seconds
+            setTimeout(() => {
+                startCarouselAnimation();
+            }, 2000);
         });
     }, 500); // Match fadeOut animation duration
     createConfettiExplosion()
@@ -251,6 +274,9 @@ function showVideoSectionFromModal() {
     // Show go to images button, hide retry button
     goToImagesBtn.style.display = 'block';
     retryBtn.style.display = 'none';
+
+    // NEW: Stop all music
+    stopAllMusic();
 
     // Fade out modal
     modal.classList.add('fadeOut');
@@ -289,6 +315,9 @@ function showVideoSection() {
     goToImagesBtn.style.display = 'none';
     retryBtn.style.display = 'block';
 
+    // NEW: Stop all music
+    stopAllMusic();
+
     // Animate image out
     imageContent.classList.add('slide-out-to-left');
     imageContent.classList.remove('show');
@@ -322,6 +351,13 @@ function showImageSectionFromVideo() {
     goToVideosBtn.style.display = 'none';
     retryBtn.style.display = 'block';
 
+    // NEW: Stop all music and play Image music
+    stopAllMusic();
+    imageMusic.play().catch(error => {
+        console.log('Image music play failed:', error.message);
+        alert(`Image music failed to play. Error: ${error.message}. Path: ${imageMusic.src}. Please ensure the file exists.`);
+    });
+
     // Animate video out
     videoContent.classList.add('slide-out-to-right');
     videoContent.classList.remove('show');
@@ -336,6 +372,10 @@ function showImageSectionFromVideo() {
         imageContent.classList.remove('slide-out-to-left');
         requestAnimationFrame(() => {
             imageContent.classList.add('show');
+            // Start carousel animation after 2 seconds
+            setTimeout(() => {
+                startCarouselAnimation();
+            }, 2000);
         });
     }, 800);
     createConfettiExplosion()
@@ -344,6 +384,7 @@ function showImageSectionFromVideo() {
 // Retry page
 function retryPage() {
     console.log('Retry button clicked or touched');
+    stopAllMusic();
     window.location.reload();
 }
 
@@ -400,6 +441,232 @@ document.querySelectorAll('.retry-btn').forEach(btn => {
         e.preventDefault(); // Prevent default touch behavior (e.g., scrolling)
         retryPage();
     });
+});
+
+// Image Paths
+const imagePaths = [
+    "images/IMG20230208134418.jpg",
+    "images/IMG20230217111128.jpg",
+    "images/IMG20230217111131.jpg",
+    "images/IMG20230217111201.jpg",
+    "images/IMG20230217111216.jpg",
+    "images/IMG20230303150706.jpg",
+    "images/IMG20230331171013.jpg",
+    "images/IMG20230331171032.jpg",
+    "images/IMG20230414142012.jpg",
+    "images/IMG20230414142030.jpg",
+    "images/IMG20231101131647.jpg",
+    "images/IMG20231104152808.jpg",
+    "images/IMG20231104152944.jpg",
+    "images/IMG20231104153009.jpg",
+    "images/IMG20231104155945.jpg",
+    "images/IMG20231104160039.jpg",
+    "images/IMG20231104161130.jpg",
+    "images/IMG20231104161231.jpg",
+    "images/IMG20231104161309.jpg",
+    "images/IMG20231104163352.jpg",
+    "images/IMG20231104164206.jpg",
+    "images/IMG20231104165835.jpg",
+    "images/IMG20231114105408.jpg",
+    "images/IMG20231227160752.jpg",
+    "images/IMG20231227172224.jpg",
+    "images/IMG20231227172241.jpg",
+    "images/IMG20240124113415.jpg",
+    "images/Snapchat-37109598.jpg",
+    "images/Snapchat-51003622.jpg",
+    "images/Snapchat-108022518.jpg",
+    "images/Snapchat-121749442.jpg",
+    "images/Snapchat-130700279.jpg",
+    "images/Snapchat-158449579.jpg",
+    "images/Snapchat-163389530.jpg",
+    "images/Snapchat-182764465.jpg",
+    "images/Snapchat-202006394.jpg",
+    "images/Snapchat-237560485.jpg",
+    "images/Snapchat-252463391.jpg",
+    "images/Snapchat-260331938.jpg",
+    "images/Snapchat-268152612.jpg",
+    "images/Snapchat-285522986.jpg",
+    "images/Snapchat-285977458.jpg",
+    "images/Snapchat-293452965.jpg",
+    "images/Snapchat-297553750.jpg",
+    "images/Snapchat-420848225.jpg",
+    "images/Snapchat-438869934.jpg",
+    "images/Snapchat-475647163.jpg",
+    "images/Snapchat-477867036.jpg",
+    "images/Snapchat-490621564.jpg",
+    "images/Snapchat-534988195.jpg",
+    "images/Snapchat-554616884.jpg",
+    "images/Snapchat-556688579.jpg",
+    "images/Snapchat-590704009.jpg",
+    "images/Snapchat-610029816.jpg",
+    "images/Snapchat-611102951.jpg",
+    "images/Snapchat-666978768.jpg",
+    "images/Snapchat-698724667.jpg",
+    "images/Snapchat-753498799.jpg",
+    "images/Snapchat-786122239.jpg",
+    "images/Snapchat-823260590.jpg",
+    "images/Snapchat-864128295.jpg",
+    "images/Snapchat-907681930.jpg",
+    "images/Snapchat-920013859.jpg",
+    "images/Snapchat-943336172.jpg",
+    "images/Snapchat-967027312.jpg",
+    "images/Snapchat-986951374.jpg",
+    "images/Snapchat-999948487.jpg",
+    "images/Snapchat-1052780133.jpg",
+    "images/Snapchat-1054156927.jpg",
+    "images/Snapchat-1058335475.jpg",
+    "images/Snapchat-1079187292.jpg",
+    "images/Snapchat-1126524373.jpg",
+    "images/Snapchat-1136435928.jpg",
+    "images/Snapchat-1162224520.jpg",
+    "images/Snapchat-1214033133.jpg",
+    "images/Snapchat-1237716460.jpg",
+    "images/Snapchat-1243901629.jpg",
+    "images/Snapchat-1259788325.jpg",
+    "images/Snapchat-1341595687.jpg",
+    "images/Snapchat-1363766555.jpg",
+    "images/Snapchat-1389610578.jpg",
+    "images/Snapchat-1398249999.jpg",
+    "images/Snapchat-1406086928.jpg",
+    "images/Snapchat-1418606677.jpg",
+    "images/Snapchat-1486257216.jpg",
+    "images/Snapchat-1508978487.jpg",
+    "images/Snapchat-1540068509.jpg",
+    "images/Snapchat-1616484320.jpg",
+    "images/Snapchat-1628869311.jpg",
+    "images/Snapchat-1673430672.jpg",
+    "images/Snapchat-1740254628.jpg",
+    "images/Snapchat-1743136804.jpg",
+    "images/Snapchat-1853582955.jpg",
+    "images/Snapchat-1866657911.jpg",
+    "images/Snapchat-1892496528.jpg",
+    "images/Snapchat-1908433702.jpg",
+    "images/Snapchat-1940137288.jpg",
+    "images/Snapchat-1950145425.jpg",
+    "images/Snapchat-2017580410.jpg",
+    "images/Snapchat-2112845490.jpg",
+    "images/Snapchat-2114230899.jpg",
+    "images/Snapchat-2119810551.jpg",
+    "images/IMG_20211006_143000.jpg",
+    "images/IMG_20211020_165052_473.webp",
+    "images/IMG_20211020_165253_018.webp",
+    "images/IMG_20220102_080449.jpg",
+    "images/IMG_20220102_080509.jpg",
+    "images/IMG_20221030_004122.jpg"
+];
+
+document.addEventListener('DOMContentLoaded', () => { 
+    const carousel = document.querySelector('.aurora-carousel'); 
+    if (!carousel) return; 
+    const track = carousel.querySelector('.carousel-track');  
+    
+    // Create original slides
+    imagePaths.forEach((path, index) => {
+        const slide = document.createElement('div');
+        slide.className = 'carousel-slide';
+        slide.innerHTML = `<img src="" data-src="${path}" alt="Image ${index + 1}" loading="lazy" class="gallery-image">`;
+        track.appendChild(slide);
+    });
+
+    // Duplicate slides 3 times for smooth 3-peek infinite scrolling (total 324 slides)
+    const originalSlides = Array.from(track.children);
+    for (let i = 0; i < 2; i++) { // Add 2 more sets
+        originalSlides.forEach(slide => {
+            const clone = slide.cloneNode(true);
+            track.appendChild(clone);
+        });
+    }
+
+    const slides = Array.from(track.children); // 324 slides
+
+    // Continuous animation setup
+    let position = 0; // Starting position in %
+    const numOriginal = imagePaths.length;
+    const visibleSlides = 3;
+    const isMobile = window.innerWidth <= 768;
+    const gapPercent = isMobile ? 1 : 0.5; // Gap from CSS
+    const slideWidthPercent = (100 / visibleSlides) - (gapPercent * (visibleSlides - 1) / visibleSlides);
+    const cycleWidthPercent = (slideWidthPercent + gapPercent) * numOriginal; // Full cycle including gaps
+    const durationPerImage = 2.5; // seconds per image
+    const speedPerSecond = cycleWidthPercent / (numOriginal * durationPerImage);
+    let animationId;
+    let isPaused = true;
+    let lastTime = 0;
+
+    function animate(currentTime) {
+        if (isPaused) return; // Skip if paused
+
+        const deltaTime = currentTime - lastTime; // ms
+        lastTime = currentTime;
+
+        // Move position left (negative for rightward flow)
+        position -= (speedPerSecond * (deltaTime / 1000));
+
+        // Reset for infinite loop (seamless when hitting end of first set)
+        if (position <= -cycleWidthPercent) {
+            position += cycleWidthPercent;
+        }
+
+        track.style.transform = `translateX(${position}%)`;
+
+        animationId = requestAnimationFrame(animate);
+    }
+
+    // Start animation
+    function startAnimation() {
+        if (!isPaused) {
+            lastTime = performance.now();
+            animationId = requestAnimationFrame(animate);
+        }
+    }
+
+    // Pause/resume on hover (tape-like)
+    function pauseAnimation() {
+        isPaused = true;
+        cancelAnimationFrame(animationId);
+    }
+
+    function resumeAnimation() {
+        isPaused = false;
+        startAnimation();
+    }
+
+    carousel.addEventListener('mouseenter', pauseAnimation);
+    carousel.addEventListener('mouseleave', resumeAnimation);
+    carousel.addEventListener('touchstart', pauseAnimation, { passive: true });
+    carousel.addEventListener('touchend', resumeAnimation);
+
+    // Lazy loading - Increased margin to preload peeks + extras
+    const observer = new IntersectionObserver(entries => { 
+        entries.forEach(entry => { 
+            if (entry.isIntersecting) { 
+                const img = entry.target.querySelector('img'); 
+                if (img.dataset.src) { 
+                    img.src = img.dataset.src; 
+                    img.removeAttribute('data-src'); 
+                    // Enhance loaded image
+                    img.style.filter = 'brightness(1.05) saturate(1.1)';
+                } 
+            } 
+        }); 
+    }, { root: carousel, rootMargin: '0px 50%' }); // Preload half screen ahead/behind
+    slides.forEach(slide => observer.observe(slide)); 
+
+    // Preload first 30 images to prevent gaps after 20
+    for (let i = 0; i < 30; i++) {
+        if (slides[i]) {
+            const img = slides[i].querySelector('img');
+            if (img.dataset.src && !img.src) {
+                img.src = img.dataset.src;
+                img.removeAttribute('data-src');
+                // Manual onload trigger
+                img.onload();
+            }
+        }
+    }
+
+    // Start the animation after a short delay for load
+    setTimeout(startAnimation, 500);
 });
 
 // Initialize enhanced particles for loading screen
@@ -502,6 +769,8 @@ function celebrate() {
     const cakeContent = document.getElementById('cakeContent');
     const celebrateButton = document.getElementById('celebrateButton');
 
+    // NEW: Stop all music and play Birthday.mp3
+    stopAllMusic();
     // Play background music on button click
     backgroundMusic.play().catch(error => {
         console.log('Background music play failed:', error.message);
@@ -596,8 +865,7 @@ const messageTimer = setInterval(() => {
 setTimeout(() => {
     clearInterval(messageTimer);
     loadingStatus.textContent = "Ready!";
-    backgroundMusic.play().catch(error => console.log('Background music play failed:', error)); // Start music when ready
-
+    
     setTimeout(() => {
         loadingScreen.classList.add('hide');
         mainPage.classList.add('show');
