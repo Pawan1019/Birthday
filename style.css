@@ -1219,29 +1219,6 @@ body {
     text-align: center;
 }
 
-.image-gallery {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 2rem;
-}
-
-.gallery-image {
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 10px;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 10px rgba(236, 72, 153, 0.3);
-    transition: transform 0.3s ease;
-    z-index: 1;
-}
-
-.gallery-image:hover {
-    transform: scale(1.05);
-}
-
 /* Video Content Styles */
 .video-content {
     display: none;
@@ -1418,6 +1395,136 @@ body {
     100% { transform: translateX(-100%); opacity: 0; }
 }
 
+/* Aurora Veil Carousel - Unique Effect */
+.aurora-carousel {
+    position: relative;
+    width: 80%;
+    max-width: 900px;
+    margin: 2rem auto;
+    overflow: hidden;
+    perspective: 1000px;
+    box-shadow: 0 10px 30px rgba(236, 72, 153, 0.3);
+    border-radius: 15px;
+    aspect-ratio: 16 / 9;
+    background: linear-gradient(180deg, rgba(0,0,0,0.05), rgba(0,0,0,0.12));
+    box-sizing: border-box;
+}
+
+.carousel-track {
+    display: flex;
+    height: 100%;
+    will-change: transform;
+}
+
+.carousel-slide {
+    flex: 0 0 calc(100% / 3); /* 33.33% per slide: left peek (33%), center (33%), right peek (33%) */
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.5vw; /* Consistent slight gap (~4-8px); vw for device consistency */
+}
+
+.carousel-slide:last-child {
+    margin-right: 0; /* No margin on last to avoid extra space at end */
+}
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 4 / 3; /* Force uniform ratio for photos; change to 1/1 for square, 16/9 for landscape */
+    object-fit: cover; /* Changed to cover for full fill without distortion; use contain if you prefer letterboxing */
+    object-position: center;
+    display: block;
+    transition: filter 0.3s ease; /* Subtle enhancement */
+}
+
+/* Left arc vignette */
+.aurora-carousel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -15px;
+    width: 40%; 
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        rgba(0,0,0,0.6) 0%,   /* darkest at the edge */
+        rgba(0,0,0,0.4) 40%,  /* smooth fade */
+        transparent 100%      /* fade into content */
+    );
+    filter: blur(15px);  /* soften transition */
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* Right arc vignette */
+.aurora-carousel::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -15px;
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(
+        to left,
+        rgba(0,0,0,0.6) 0%,
+        rgba(0,0,0,0.4) 40%,
+        transparent 100%
+    );
+    filter: blur(15px);
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* Aurora veil - Animates on each slide for flowing magic during scroll */
+.carousel-slide::before {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 300%;
+    opacity: 0;
+    transform: skewY(20deg) translateY(100%);
+    filter: blur(20px);
+    animation: auroraWave 3s ease-in-out infinite; /* Faster for continuous feel */
+    z-index: 2;
+    pointer-events: none;
+}
+
+@keyframes auroraWave {
+    0% { transform: skewY(20deg) translateY(100%); opacity: 0; }
+    50% { transform: skewY(0) translateY(0); opacity: 0.8; filter: blur(30px); }
+    100% { transform: skewY(-20deg) translateY(-100%); opacity: 0; filter: blur(20px); }
+}
+
+/* Navigation - Disabled/dimmed for continuous focus */
+.carousel-prev, .carousel-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: linear-gradient(45deg, #f472b6, #a855f7);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    z-index: 3;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.carousel-prev { left: 10px; }
+.carousel-next { right: 10px; }
+
+.carousel-prev:hover, .carousel-next:hover {
+    transform: translateY(-50%) scale(1.1);
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
     .message-box {
@@ -1588,8 +1695,42 @@ body {
         padding: 0.6rem 1.2rem;
         font-size: 0.9rem;
     }
+    .aurora-carousel {
+        width: 90%;
+    }
+    .aurora-carousel::before {
+        width: 25%;
+        background: linear-gradient(
+            to right,
+            rgba(0,0,0,0.6) 0%,   /* darkest at the edge */
+            rgba(0,0,0,0.4) 40%,  /* smooth fade */
+            transparent 100%      /* fade into content */
+        );
+        filter: blur(8px);
+    }
+    .aurora-carousel::after {
+        width: 25%;
+        background: linear-gradient(
+            to left,
+            rgba(0,0,0,0.6) 0%,   /* darkest at the edge */
+            rgba(0,0,0,0.4) 40%,  /* smooth fade */
+            transparent 100%      /* fade into content */
+        );
+        filter: blur(8px);
+    }
+    .carousel-track {
+        gap: 1%;
+    }
+    .carousel-slide {
+        flex: 0 0 calc((100% / 3) - (1% * 2 / 3));
+    }
+    .carousel-slide img {
+        max-height: 300px;
+    }
+    .carousel-slide::before {
+        filter: blur(6px);
+    }
 }
-
 
 @media (min-width: 768px) {
     .main-title { font-size: 4rem; }
